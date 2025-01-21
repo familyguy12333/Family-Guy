@@ -157,7 +157,7 @@
             if (Array.from(allButtons).every(btn => btn.disabled)) {
                 const previousScore = parseInt(localStorage.getItem('quiz_score') || '0');
                 const totalScore = previousScore + score;
-                document.getElementById('result').innerHTML = `<i class="fas fa-star icon"></i>Chúc mừng, ${playerName}! Bạn đã đạt ${score} điểm! Tổng điểm hiện tại: ${totalScore}`;
+                document.getElementById('result').innerHTML = `<i class="fas fa-star icon"></i>Chúc mừng ${playerName},Bạn đã đạt ${score} điểm.`;
                 localStorage.setItem('quiz_score', totalScore);
             }
         }
