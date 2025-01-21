@@ -40,7 +40,7 @@
             color: #ff99ff;
         }
 
-        .home-button {
+        .button {
             display: inline-block;
             padding: 10px 20px;
             background: #ff99ff;
@@ -49,9 +49,11 @@
             border-radius: 8px;
             text-align: center;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            margin: 10px auto;
+            display: block;
         }
 
-        .home-button:hover {
+        .button:hover {
             background: #ff66ff;
             transform: scale(1.05);
         }
@@ -106,9 +108,10 @@
     <div class="container">
         <h1><i class="fas fa-graduation-cap icon"></i>Quiz Toán Cấp 1</h1>
         <h2 id="playerName"><i class="fas fa-user icon"></i>Chào mừng, <span id="playerNameText">Người chơi</span>!</h2>
-        <a href="index.html" class="home-button"><i class="fas fa-home"></i> Quay về Trang Chủ</a>
+        <a href="index.html" class="button"><i class="fas fa-home"></i> Quay về Trang Chủ</a>
         <div id="quiz"></div>
         <div id="result"></div>
+        <a href="javascript:restartGame()" class="button"><i class="fas fa-redo"></i> Chơi Lại</a>
     </div>
     <script>
         const playerName = localStorage.getItem('user_name') || "Người chơi mới";
@@ -128,6 +131,7 @@
         async function displayQuestions() {
             const questions = await loadQuestions();
             const quizContainer = document.getElementById('quiz');
+            quizContainer.innerHTML = ""; 
             questions.forEach((q, index) => {
                 const questionDiv = document.createElement('div');
                 questionDiv.classList.add('question');
@@ -160,6 +164,13 @@
                 document.getElementById('result').innerHTML = `<i class="fas fa-star icon"></i>Chúc mừng, ${playerName}! Bạn đã đạt ${score} điểm! Tổng điểm hiện tại: ${totalScore}`;
                 localStorage.setItem('quiz_score', totalScore);
             }
+        }
+
+        function restartGame() {
+            score = 0;
+            document.getElementById('quiz').innerHTML = "";
+            document.getElementById('result').innerHTML = "";
+            displayQuestions();
         }
 
         displayQuestions();
